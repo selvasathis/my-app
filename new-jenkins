@@ -9,3 +9,4 @@ node{
 	  sh 'mv target/myweb*.war target/newapp.war'
 }
 }
+}
