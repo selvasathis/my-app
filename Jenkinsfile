@@ -11,5 +11,21 @@ pipeline {
                 }
             }
         }
+        stage ('build docker image') {
+            steps {
+                script {
+                    sh 'docker build -t thendralsathis/myweb:002'
+                }
+            }
+        }
+        stage ('run a container') {
+            steps {
+                script {
+                    sh 'docker run -itd --name sathis -p "8085:80" thendralsathis/myweb:002'
+                    echo ' container created'
+                }
+            }
+        }
     }
 }
+
