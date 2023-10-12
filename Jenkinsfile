@@ -14,7 +14,7 @@ pipeline {
         stage ('build docker image') {
             steps {
                 script {
-                    sh 'docker build -t thendralsathis/myweb:002'
+                    sh 'docker build -t thendralsathis/myweb:002 .'
                 }
             }
         }
