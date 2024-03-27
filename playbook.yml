@@ -1,0 +1,36 @@
+---
+- name: Create backup for Tomcat server
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Stop Tomcat service
+      systemd:
+        name: tomcat
+        state: stopped
+
+    - name: Create backup directory
+      file:
+        path: /opt/backup/tomcat
+        state: directory
+        mode: '0755'
+
+    - name: Copy Tomcat configuration files
+      copy:
+        src: /opt/tomcat/conf
+        dest: /opt/backup/tomcat/conf
+        remote_src: yes
+
+    - name: Copy webapps directory
+      copy:
+        src: /opt/tomcat/webapps/ROOT
+        dest: /path/to/backup/tomcat_webapps
+        remote_src: yes
+        recurse: yes
+
+    # Add additional tasks as needed, such as copying other relevant files or directories
+
+    - name: Start Tomcat service
+      systemd:
+        name: tomcat
+        state: started
